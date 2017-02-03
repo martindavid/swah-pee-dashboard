@@ -1,9 +1,16 @@
-import { createStore } from 'redux';
+import { applyMiddleware ,createStore, combineReducers } from 'redux';
+import { promiseMiddleware } from './middleware';
 
-const reducer = (state = {}, action) => {
-    return state;
+import page from './reducers/page';
+
+const reducer = combineReducers({
+    page
+})
+
+const getMiddleware = () => {
+    return applyMiddleware(promiseMiddleware);
 }
 
-const store = createStore(reducer,{});
+const store = createStore(reducer,getMiddleware());
 
 export default store;
