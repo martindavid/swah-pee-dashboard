@@ -19,9 +19,10 @@ class People extends React.Component {
     }
 
     render() {
-        console.log(this.state);
+        var selectedField = ["name", "height", "birth_year","gender", "hair_color", "skin_color"];
         return (
-            <TableRenderer peoples={this.props.peoples} />
+
+            <TableRenderer data={this.props.peoples} part="People" header={selectedField} />
         )
     }
 }
