@@ -5,6 +5,11 @@ export default (state = {}, action) => {
                 ...state,
                 peoples: action.payload.results
             };
+        case 'FILM_PAGE_LOADED':
+            return {
+                ...state,
+                films: action.payload.results
+            };
         default:
             return state;
     }

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import './TableRenderer.css';
+import TableFilter from './TableFilter';
+import TableFooter from './TableFooter';
 
 const TbodyRenderer = props => {
     if (props) {
@@ -11,7 +13,7 @@ const TbodyRenderer = props => {
         })
         return (
             <tr>
-                { list }
+                {list}
             </tr>
         );
     }
@@ -45,18 +47,25 @@ const TableRenderer = props => {
                     <h4 className="title">{props.part} List</h4>
                     <p className="category">List for {props.part.toLowerCase()} data</p>
                 </div>
-                <div className="card-content table-responsive">
-                    <table className="table">
-                        <thead className="text-primary">
-                            <tr>
-                                {headerList}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tbody}
-                        </tbody>
-                    </table>
-
+                <div className="card-content">
+                    <div className="material-table">
+                        <TableFilter />
+                        <div className="row">
+                            <div className="col-md-12">
+                                <table className="table">
+                                    <thead className="text-primary">
+                                        <tr>
+                                            {headerList}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {tbody}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <TableFooter />
+                    </div>
                 </div>
             </div>
         );

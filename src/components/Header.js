@@ -16,22 +16,6 @@ class Header extends React.Component {
 						</button>
 						<a className="navbar-brand" href="#">Star Wars API Explorer</a>
 					</div>
-					<div className="collapse navbar-collapse">
-						<ul className="nav navbar-nav navbar-right">
-							<li>
-								<a href="#pablo" className="dropdown-toggle" data-toggle="dropdown">
-									<i className="material-icons">dashboard</i>
-									<p className="hidden-lg hidden-md">Dashboard</p>
-								</a>
-							</li>
-							<li>
-								<a href="#pablo" className="dropdown-toggle" data-toggle="dropdown">
-	 							   <i className="material-icons">person</i>
-	 							   <p className="hidden-lg hidden-md">Profile</p>
-	 						   </a>
-							</li>
-						</ul>
-					</div>
 				</div>
 			</nav>
         );

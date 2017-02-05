@@ -20,10 +20,9 @@ class Film extends React.Component {
     }
 
     render() {
+        var header = ['episode_id','title','release_date','director'];
         return (
-            <div>
-                <p>Film</p>
-            </div>
+            <TableRenderer data={this.props.films} header={header} part="Film" />
         )
     }
 }
