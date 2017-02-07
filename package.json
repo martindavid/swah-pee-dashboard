@@ -2,7 +2,7 @@
   "name": "swah-pee-dashboard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://martinlabs.me/swah-pee-dashboard/",
+  "homepage": "https://swahpee-dashboard.herokuapp.com/",
   "devDependencies": {
     "react-scripts": "0.8.5"
   },
