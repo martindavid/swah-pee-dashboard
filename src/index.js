@@ -14,6 +14,8 @@ import Vehicle from './components/Vehicle';
 import Species from './components/Species';
 import Planet from './components/Planet';
 
+import './assets/css/material-dashboard.css';
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>

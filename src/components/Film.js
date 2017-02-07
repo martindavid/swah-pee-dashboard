@@ -2,7 +2,7 @@ import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
 
-import TableRenderer from './TableRenderer';
+import TableRenderer from './grid';
 
 const mapStateToProps = state => ({
     films: state.page.films
