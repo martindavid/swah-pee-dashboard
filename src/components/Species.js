@@ -1,30 +1,28 @@
-import React from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import React from "react";
+import agent from "../agent";
+import TableRenderer from "./grid";
 
-import TableRenderer from './grid';
+export default class Species extends React.Component {
+  state = {
+    species: []
+  };
 
-const mapStateToProps = state => ({
-    species: state.page.species
-});
+  componentWillMount() {
+    agent.API.all("species").then(res => {
+      this.setState({ species: res.results });
+    });
+  }
 
-const mapDispatchToProps = dispatch => ({
-    onLoad: (payload) =>
-        dispatch({ type: 'SPECIES_PAGE_LOADED', payload })
-})
-
-class Species extends React.Component {
-
-    componentWillMount() {
-        this.props.onLoad(agent.API.all('species'));
-    }
-
-    render() {
-        var header = ['name','designation','classification','skin_colors', 'language'];
-        return (
-            <TableRenderer data={this.props.species} header={header} part="Species" />
-        )
-    }
+  render() {
+    var header = [
+      "name",
+      "designation",
+      "classification",
+      "skin_colors",
+      "language"
+    ];
+    return (
+      <TableRenderer data={this.state.species} header={header} part="Species" />
+    );
+  }
 }
-
-export default connect(mapStateToProps,mapDispatchToProps)(Species);

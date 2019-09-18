@@ -1,27 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-class NavItem extends React.Component {
-    
-    render() {
-        const { router } = this.context;
-        const { iconName, onlyActiveOnIndex, to, children } = this.props;
+export default class NavItem extends React.Component {
+  render() {
+    const { iconName, to, children } = this.props;
 
-        const isActive = router.isActive(to, onlyActiveOnIndex);
-
-        return (
-            <li className={isActive ? 'active' : ''}>
-                <Link to={this.props.to}>
-                    <i className="material-icons">{iconName}</i>
-                    <p>{children}</p>
-                </Link>
-            </li>
-        );
-    }
+    return (
+      <li>
+        <NavLink activeClassName="active" to={to}>
+          <i className="material-icons">{iconName}</i>
+          <p>{children}</p>
+        </NavLink>
+      </li>
+    );
+  }
 }
-
-NavItem.contextTypes = {
-    router: React.PropTypes.object
-}
-
-export default NavItem;

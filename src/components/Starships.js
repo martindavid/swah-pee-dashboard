@@ -1,30 +1,32 @@
-import React from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import React from "react";
+import agent from "../agent";
+import TableRenderer from "./grid";
 
-import TableRenderer from './grid';
+export default class Starships extends React.Component {
+  state = {
+    starships: []
+  };
 
-const mapStateToProps = state => ({
-    starships: state.page.starships
-});
+  componentWillMount() {
+    agent.API.all("starships").then(res => {
+      this.setState({ starships: res.results });
+    });
+  }
 
-const mapDispatchToProps = dispatch => ({
-    onLoad: (payload) =>
-        dispatch({ type: 'STARSHIP_PAGE_LOADED', payload })
-})
-
-class Starships extends React.Component {
-
-    componentWillMount() {
-        this.props.onLoad(agent.API.all('starships'));
-    }
-
-    render() {
-        var header = ['name','model','starship_class','manufacturer', 'hyperdrive_rating'];
-        return (
-            <TableRenderer data={this.props.starships} header={header} part="Starships" />
-        )
-    }
+  render() {
+    var header = [
+      "name",
+      "model",
+      "starship_class",
+      "manufacturer",
+      "hyperdrive_rating"
+    ];
+    return (
+      <TableRenderer
+        data={this.state.starships}
+        header={header}
+        part="Starships"
+      />
+    );
+  }
 }
-
-export default connect(mapStateToProps,mapDispatchToProps)(Starships);

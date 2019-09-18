@@ -1,30 +1,37 @@
-import React from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import React from "react";
+import agent from "../agent";
 
-import TableRenderer from './grid';
+import TableRenderer from "./grid";
 
-const mapStateToProps = state =>({
-    peoples: state.page.peoples
-});
+export default class People extends React.Component {
+  state = {
+    peoples: []
+  };
 
-const mapDispatchToProps = dispatch => ({
-    onLoad: (payload) =>
-        dispatch({ type: 'PEOPLE_PAGE_LOADED', payload })
-});
+  componentDidMount() {
+    agent.API.all("people").then(res => {
+      this.setState({ peoples: res.results });
+    });
+  }
 
-class People extends React.Component {
-    componentWillMount() {
-        this.props.onLoad(agent.API.all('people'));
-    }
-
-    render() {
-        var selectedField = ["name", "height", "birth_year","gender", "hair_color", "skin_color"];
-        return (
-
-            <TableRenderer data={this.props.peoples} part="People" header={selectedField} />
-        )
-    }
+  render() {
+    var selectedField = [
+      "name",
+      "height",
+      "birth_year",
+      "gender",
+      "hair_color",
+      "skin_color"
+    ];
+    return (
+      <>
+        <h3>People</h3>
+        <TableRenderer
+          data={this.state.peoples}
+          part="People"
+          header={selectedField}
+        />
+      </>
+    );
+  }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(People);

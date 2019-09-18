@@ -1,30 +1,23 @@
-import React from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import React from "react";
+import agent from "../agent";
 
-import TableRenderer from './grid';
+import TableRenderer from "./grid";
 
-const mapStateToProps = state => ({
-    films: state.page.films
-});
+export default class Film extends React.Component {
+  state = {
+    films: []
+  };
 
-const mapDispatchToProps = dispatch => ({
-    onLoad: (payload) =>
-        dispatch({ type: 'FILM_PAGE_LOADED', payload })
-})
+  componentWillMount() {
+    agent.API.all("films").then(res => {
+      this.setState({ films: res.results });
+    });
+  }
 
-class Film extends React.Component {
-
-    componentWillMount() {
-        this.props.onLoad(agent.API.all('films'));
-    }
-
-    render() {
-        var header = ['episode_id','title','release_date','director'];
-        return (
-            <TableRenderer data={this.props.films} header={header} part="Film" />
-        )
-    }
+  render() {
+    var header = ["episode_id", "title", "release_date", "director"];
+    return (
+      <TableRenderer data={this.state.films} header={header} part="Film" />
+    );
+  }
 }
-
-export default connect(mapStateToProps,mapDispatchToProps)(Film);

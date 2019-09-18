@@ -1,30 +1,26 @@
-import React from 'react';
-import agent from '../agent';
-import { connect } from 'react-redux';
+import React from "react";
+import agent from "../agent";
+import TableRenderer from "./grid";
 
-import TableRenderer from './grid';
+export default class Vehicle extends React.Component {
+  state = {
+    vehicles: []
+  };
 
-const mapStateToProps = state => ({
-    vehicle: state.page.vehicle
-});
+  componentWillMount() {
+    agent.API.all("vehicles").then(res => {
+      this.setState({ vehicles: res.results });
+    });
+  }
 
-const mapDispatchToProps = dispatch => ({
-    onLoad: (payload) =>
-        dispatch({ type: 'VEHICLE_PAGE_LOADED', payload })
-})
-
-class Vehicle extends React.Component {
-
-    componentWillMount() {
-        this.props.onLoad(agent.API.all('vehicles'));
-    }
-
-    render() {
-        var header = ['name','model','crew', 'passengers','manufacturer'];
-        return (
-            <TableRenderer data={this.props.vehicle} header={header} part="Vehicle" />
-        )
-    }
+  render() {
+    var header = ["name", "model", "crew", "passengers", "manufacturer"];
+    return (
+      <TableRenderer
+        data={this.state.vehicles}
+        header={header}
+        part="Vehicle"
+      />
+    );
+  }
 }
-
-export default connect(mapStateToProps,mapDispatchToProps)(Vehicle);
