@@ -5,7 +5,7 @@
   "homepage": "https://swahpee-dashboard.herokuapp.com/",
   "devDependencies": {
     "eslint": "^6.4.0",
-    "react-scripts": "3.1.1"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "axios": "^0.19.0",
